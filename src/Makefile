@@ -2,20 +2,20 @@ CC=gcc
 CFLAGS=-I../include
 LIBS=-lpcap
 
-SNIFFTEST_DEPS=../include/sniffing.h
-SNIFFTEST_OBJ=sniffing.o
-SNIFFTEST_SRC=sniffing.c
-SNIFFTEST_MAIN=main_sniffing.c
+SNIFFING_DEPS=../include/sniffing.h
+SNIFFING_OBJ=sniffing.o
+SNIFFING_SRC=sniffing.c
+SNIFFING_MAIN=main_sniffing.c
 
-SPOOFTEST_DEPS=../include/spoofing.h
-SPOOFTEST_OBJ=spoofing.o spoofing_test.o
+SPOOFING_DEPS=../include/spoofing.h
+SPOOFING_OBJ=spoofing.o spoofing_test.o
 
-OBJ=$(SNIFFTEST_OBJ) $(SPOOFTEST_OBJ)
+OBJ=$(SNIFFING_OBJ) $(SPOOFING_OBJ)
 
-$(SNIFFTEST_OBJ): $(SNIFFTEST_SRC) $(SNIFFTEST_DEPS)
+$(SNIFFING_OBJ): $(SNIFFING_SRC) $(SNIFFING_DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-sniffing: $(SNIFFTEST_OBJ) $(SNIFFTEST_DEPS) $(SNIFFTEST_MAIN)
+sniffing: $(SNIFFING_OBJ) $(SNIFFING_DEPS) $(SNIFFING_MAIN)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 all: $(OBJ)
