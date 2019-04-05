@@ -30,7 +30,7 @@ struct ethframe_header_t {
 #define IP_PACKET_T 0x800
 
 struct ippacket_header_t {
-    u_char          iph_iver:4,      // IP header length (4 bits)
+    u_char          iph_iver:4,     // IP header length (4 bits)
                     iph_ihl:4,      // IP version (4 bits)
                     iph_tos;        // Type of service
     u_short         iph_len,        // IP Packet length (data + header)
@@ -51,16 +51,28 @@ struct ippacket_header_t {
 typedef uint32_t tcp_seq;
 
 struct tcppacket_header_t {
-        u_short th_sport;               // Source port 
-        u_short th_dport;               // Destination port 
-        tcp_seq th_seq;                 // Sequence number 
-        tcp_seq th_ack;                 // Acknowledgement number 
-        u_char  th_off:4,               // Data offset, rsvd 
-                th_reserved:3;          // Reserved area
-        u_short th_flags:9;             // Flags
-        u_short th_win;                 // Window 
-        u_short th_sum;                 // Checksum 
-        u_short th_urp;                 // Urgent pointer 
+    u_short th_sport;               // Source port 
+    u_short th_dport;               // Destination port 
+    tcp_seq th_seq;                 // Sequence number 
+    tcp_seq th_ack;                 // Acknowledgement number 
+    u_char  th_off:4,               // Data offset, rsvd 
+            th_reserved:3;          // Reserved area
+    u_short th_flags:9;             // Flags
+    u_short th_win;                 // Window 
+    u_short th_sum;                 // Checksum 
+    u_short th_urp;                 // Urgent pointer 
+};
+
+/*
+    ICMP packet header structure
+    https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Datagram_structure
+*/
+struct icmppacket_header_t {
+    u_char  icmph_type,         // ICMP message type
+            icmph_code;         // Error code
+    u_short icmph_chksum,       // Checksum for ICMP header and data
+            icmph_id,           // Used for identifying request
+            icmp_seq;           // Sequence number
 };
 
 

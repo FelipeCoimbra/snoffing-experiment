@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #define BUFFER_SIZE 1024
 
@@ -34,7 +35,7 @@ void verify_protocol(const char *protocol) {
     }
 
     if (strcmp(protocol, "icmp") != 0 && strcmp(protocol, "udp") != 0 ) {
-        exit_error(2);
+        exit_error(2, protocol);
     }
 }
 
@@ -79,9 +80,14 @@ int main(int argc, char *argv[]) {
 
     ///////////////////////////////////////////////////////////////
     //
-    //  Spoof packet
+    //  Spoof packets
     //
-    spoof(socket_desc, destination, protocol, buffer);
+    int count = 1;
+    while(1) {
+        spoof(socket_desc, destination, protocol, buffer);
+        printf("Sent spoof packet number %d\n", count++);
+        sleep(1);
+    }
 
     return 0;
 }
