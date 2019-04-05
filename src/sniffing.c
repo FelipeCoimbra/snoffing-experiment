@@ -77,12 +77,8 @@ void print_proto_src_dst(u_char *args, const struct pcap_pkthdr *header, const u
         get_protocol_label(data_protocol, ip_header->iph_protocol);
 
         // Print message
-        printf("%s %s \n"
-                "\tSource addr: %s\n"
-                "\tDestination addr: %s\n", 
-                current_time, data_protocol,
-                inet_ntoa(ip_header->iph_sourceip),
-                inet_ntoa(ip_header->iph_destip));
+        printf("%s %s\n\tSource addr: %s\n", current_time, data_protocol, inet_ntoa(ip_header->iph_sourceip));
+        printf("\tDestination addr: %s\n", inet_ntoa(ip_header->iph_destip));
     } else {
         // Just call simple_callback
         simple_callback(args, header, packet);
