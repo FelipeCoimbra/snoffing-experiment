@@ -30,8 +30,8 @@ struct ethframe_header_t {
 #define IP_PACKET_T 0x800
 
 struct ippacket_header_t {
-    u_char          iph_ihl:4,      // IP header length (4 bits)
-                    iph_ver:4,      // IP version (4 bits)
+    u_char          iph_iver:4,      // IP header length (4 bits)
+                    iph_ihl:4,      // IP version (4 bits)
                     iph_tos;        // Type of service
     u_short         iph_len,        // IP Packet length (data + header)
                     iph_ident,      // Identification
@@ -40,8 +40,8 @@ struct ippacket_header_t {
     u_char          iph_ttl,        // Time to Live
                     iph_protocol;   // Protocol type
     u_short         iph_chksum;     // IP datagram checksum
-    struct in_addr  iph_source,     // Source IP Address
-                    iph_dest;       // Destination IP address
+    struct in_addr  iph_sourceip,   // Source IP Address
+                    iph_destip;     // Destination IP address
 };
 
 #endif

@@ -66,7 +66,7 @@ void print_proto_src_dst(u_char *args, const struct pcap_pkthdr *header, const u
     char current_time[TIMELABEL_MAX_SIZE];
     get_time_label(current_time);
 
-    struct ethframe_header_t* eth_header = (struct ethheader*)packet;
+    struct ethframe_header_t* eth_header = (struct ethframe_header_t*)packet;
 
     // Convert from network convention to host convention and compare
     if (ntohs(eth_header->ether_type) == IP_PACKET_T) {
@@ -79,10 +79,10 @@ void print_proto_src_dst(u_char *args, const struct pcap_pkthdr *header, const u
         // Print message
         printf("%s %s \n"
                 "\tSource addr: %s\n"
-                "\tDestination addr: %s", 
+                "\tDestination addr: %s\n", 
                 current_time, data_protocol,
-                inet_ntoa(ip_header->iph_source),
-                inet_ntoa(ip_header->iph_dest));
+                inet_ntoa(ip_header->iph_sourceip),
+                inet_ntoa(ip_header->iph_destip));
     } else {
         // Just call simple_callback
         simple_callback(args, header, packet);
