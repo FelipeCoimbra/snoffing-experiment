@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-I../include
 LIBS=-lpcap
 
-SNIFFING_DEPS=../include/sniffing.h
+SNIFFING_DEPS=../include/sniffing.h ../include/packet.h
 SNIFFING_OBJ=sniffing.o
 SNIFFING_SRC=sniffing.c
 SNIFFING_MAIN=main_sniffing.c

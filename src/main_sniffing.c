@@ -8,11 +8,15 @@ void exit_error(int code, ...) {
     switch (code)
     {
         case 1:
-            printf("Usage: sniffing <NETWORK INTERFACE> <FILTER SYNTAX>[optional]\n");
+            printf("Usage: sniffing <NETWORK INTERFACE> <FILTER SYNTAX> <CALLBACK>\n");
             break;
         
         case 2:
             printf("Error: Could not find device %s\n", args[1]);
+            break;
+
+        case 3:
+            printf("Error: Could not find specified callback function %s\n", args[1]);
             break;
 
         default:
@@ -25,11 +29,20 @@ void exit_error(int code, ...) {
     Returns a callback function to process sniffed packets according to the user choice
 */
 void (*pick_callback(const char* user_callback))(u_char *, const struct pcap_pkthdr *, const u_char *) {
-    // Sample callback function
     if (user_callback == NULL || strlen(user_callback) == 0){
-         return simple_callback;
+        printf("Setting up simple callback function.\n");
+        return simple_callback;
     }
-    return print_proto_src_dst;
+    if (strcmp(user_callback, "print") == 0) {
+        printf("Setting up ip address print function.\n");
+        return print_proto_src_dst;
+    }
+    if (strcmp(user_callback, "steal") == 0) {
+        printf("Setting up malicious callback function.\n");
+        return steal_callback;
+    }
+
+    exit_error(3, user_callback);
 }
 
 /*

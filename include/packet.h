@@ -25,7 +25,7 @@ struct ethframe_header_t {
 
 /*
     IP packet header structure
-    https://en.wikipedia.org/wiki/IPv4#Packet_structure
+   https://en.wikipedia.org/wiki/IPv4#Packet_structure
 */
 #define IP_PACKET_T 0x800
 
@@ -43,5 +43,25 @@ struct ippacket_header_t {
     struct in_addr  iph_sourceip,   // Source IP Address
                     iph_destip;     // Destination IP address
 };
+
+/*
+    TCP packet header structure
+    https://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_segment_structure
+*/
+typedef uint32_t tcp_seq;
+
+struct tcppacket_header_t {
+        u_short th_sport;               // Source port 
+        u_short th_dport;               // Destination port 
+        tcp_seq th_seq;                 // Sequence number 
+        tcp_seq th_ack;                 // Acknowledgement number 
+        u_char  th_off:4,               // Data offset, rsvd 
+                th_reserved:3;          // Reserved area
+        u_short th_flags:9;             // Flags
+        u_short th_win;                 // Window 
+        u_short th_sum;                 // Checksum 
+        u_short th_urp;                 // Urgent pointer 
+};
+
 
 #endif
