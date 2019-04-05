@@ -8,10 +8,12 @@ SNIFFING_SRC=sniffing.c
 SNIFFING_MAIN=main_sniffing.c
 
 SPOOFING_DEPS=../include/spoofing.h
-SPOOFING_OBJ=spoofing.o spoofing_test.o
+SPOOFING_OBJ=spoofing.o
+SPOOFING_SRC=spoofing.c
 SPOOFING_MAIN=main_spoofing.c
 
 OBJ=$(SNIFFING_OBJ) $(SPOOFING_OBJ)
+DEPS=$(SNIFFING_DEPS) $(SPOOFING_DEPS)
 
 $(SNIFFING_OBJ): $(SNIFFING_SRC) $(SNIFFING_DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -19,14 +21,17 @@ $(SNIFFING_OBJ): $(SNIFFING_SRC) $(SNIFFING_DEPS)
 sniffing: $(SNIFFING_OBJ) $(SNIFFING_DEPS) $(SNIFFING_MAIN)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
+$(SPOOFING_OBJ): $(SPOOFING_SRC) $(SPOOFING_DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
 spoofing: $(SPOOFING_OBJ) $(SPOOFING_DEPS) $(SPOOFING_MAIN)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
-all: $(OBJ)
+all: $(OBJ) $(DEPS)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
 
 clean:
 	rm -f *.o *~
-	rm -f sniffing
+	rm -f sniffing spoofing
