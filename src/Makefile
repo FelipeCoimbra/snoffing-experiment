@@ -9,6 +9,7 @@ SNIFFING_MAIN=main_sniffing.c
 
 SPOOFING_DEPS=../include/spoofing.h
 SPOOFING_OBJ=spoofing.o spoofing_test.o
+SPOOFING_MAIN=main_spoofing.c
 
 OBJ=$(SNIFFING_OBJ) $(SPOOFING_OBJ)
 
@@ -16,6 +17,9 @@ $(SNIFFING_OBJ): $(SNIFFING_SRC) $(SNIFFING_DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 sniffing: $(SNIFFING_OBJ) $(SNIFFING_DEPS) $(SNIFFING_MAIN)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+
+spoofing: $(SPOOFING_OBJ) $(SPOOFING_DEPS) $(SPOOFING_MAIN)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 all: $(OBJ)
