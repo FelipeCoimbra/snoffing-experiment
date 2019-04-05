@@ -25,7 +25,7 @@ struct ethframe_header_t {
 
 /*
     IP packet header structure
-   https://en.wikipedia.org/wiki/IPv4#Packet_structure
+    https://en.wikipedia.org/wiki/IPv4#Packet_structure
 */
 #define IP_PACKET_T 0x800
 

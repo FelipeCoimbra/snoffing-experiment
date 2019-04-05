@@ -25,7 +25,7 @@ $(SPOOFING_OBJ): $(SPOOFING_SRC) $(SPOOFING_DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 spoofing: $(SPOOFING_OBJ) $(SPOOFING_DEPS) $(SPOOFING_MAIN)
-	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CFLAGS)
 
 all: $(OBJ) $(DEPS)
 	$(CC) -o $@ $^ $(CFLAGS)
